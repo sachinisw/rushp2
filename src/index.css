@@ -1,0 +1,132 @@
+body {
+ margin: 20px;
+ padding: 0;
+ font-family: sans-serif;
+}
+
+.Square{
+ background-color:#f2ebc7;
+ width: 60px;
+ height:60px;
+ border:solid 2px;
+ border-radius: 5px;
+}
+
+.SquareBorderless{
+ background-color:#f2ebc7;
+ width: 60px;
+ height:60px;
+ border:solid 2px #f2ebc7;
+ border-radius: 5px;
+}
+
+.SquareSelected{
+ background-color:#f2ebc7;
+ width: 60px;
+ height:60px;
+ border:solid 2px;
+ border-radius: 5px;
+ opacity:0.3;
+}
+
+.SquareSelectedBorderless{
+ background-color:#f2ebc7;
+ width: 60px;
+ height:60px;
+ border:solid 2px #f2ebc7;
+ border-radius: 5px;
+ opacity:0.3;
+}
+
+.Car{
+ background-color: #239780;
+ width:40px;
+ height:40px;
+}
+	.CarVerticleTop{
+	 height: 50px;
+	 margin: 8px 8px 0 8px;
+	 border-radius: 10px 10px 0 0;
+	}
+	.CarVerticleBottom{
+	 height: 50px;
+	 margin: 0 8px 8px 8px;
+	 border-radius: 0 0 10px 10px;
+	}
+	.CarHorizontalLeft{
+	 width: 50px;
+	 margin: 8px 0 8px 8px;
+	 border-radius: 10px 0 0 10px;
+	}
+	.CarHorizontalRight{
+	 width: 50px;
+	 margin: 8px 8px 8px 0;
+	 border-radius: 0 10px 10px 0;
+	}
+
+.Truck{
+ background-color: #239780;
+ width:40px;
+ height:40px;
+}
+	.TruckVerticleTop {
+	 height: 50px;
+	 margin: 8px 8px 0 8px;
+	 border-radius: 10px 10px 0 0;
+	}
+	.TruckVerticleMid {
+	 height: 60px;
+	 margin: 0 8px 0 8px;
+	}
+	.TruckVerticleBottom {
+	 height: 50px;
+	 margin: 0 8px 8px 8px;
+	 border-radius: 0 0 10px 10px;
+	}
+	.TruckHorizontalLeft {
+	 width: 50px;
+	 margin: 8px 0 8px 8px;
+	 border-radius: 10px 0 0 10px;
+	}
+	.TruckHorizontalMid {
+	 width: 60px;
+	 margin: 8px 0 8px 0;
+	}
+	.TruckHorizontalRight {
+	 width: 50px;
+	 margin: 8px 8px 8px 0;
+	 border-radius: 0 10px 10px 0;
+	}
+
+.GoalCar{
+ background-color: #f90404;
+}
+
+.Board{
+ display: grid;
+ grid-template-columns: 60px 60px 60px 60px 60px 60px ;
+ padding-top: 10px;
+ padding-left: 20px;
+}
+
+.Alert{
+ position: relative;
+ padding: 0.75rem 1.25rem;
+ margin-bottom: 20px;
+ margin-top: 20px;
+ border: 1px solid transparent;
+ border-top-color: transparent;
+ border-right-color: transparent;
+ border-bottom-color: transparent;
+ border-left-color: transparent;
+ border-radius: 0.25rem;
+}
+
+.NewPuzzle{
+ margin-top: 20px;
+ margin-left: 20px;
+}
+
+.card-img-top{
+ width:50%;
+}
