@@ -1,54 +1,53 @@
 import React from 'react'
-import Evaluation from './Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
-import CardGroup from 'react-bootstrap/CardGroup'
-import ReactPlayer from 'react-player'
+import Container from 'react-bootstrap/Container'
+import SurveyItem from './SurveyItem'
+import Alert from 'react-bootstrap/Alert'
 
 class Survey extends React.Component{
 	
 	constructor(props) {
 		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	  }
-	  
-	  handleClick(tab) {
-		console.log("show form now!")
-	  }
-	  	  
+		this.state = {
+			show:false,
+			currentQuiz:0
+		};
+		this.displayAlert = this.displayAlert.bind(this);
+		this.alertOnClose = this.alertOnClose.bind(this);
+	}
+	
+	displayAlert(status,quiz){
+		this.setState({
+			 show:status,
+			 currentQuiz:quiz
+		});
+	}
+	
+	alertOnClose(){
+		this.setState({
+			 show:false
+		});
+	}
+	
 	render() {
+		let alert1=null, alert2=null, alert3=null
+		if(this.state.currentQuiz===1){
+			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 1 was succesfully submitted</Alert>
+		}
+		if(this.state.currentQuiz===2){
+			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 2 was succesfully submitted</Alert>
+		}
+		if(this.state.currentQuiz===3){
+			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 3 was succesfully submitted</Alert>
+		}
 		 return (
-		 <CardGroup>
-			<Card>
-			  <Card.Header><b>Example Play 1</b></Card.Header>
-			  <Card.Body>
-				<Card.Title>Watch video 1 for a Rush Hour game play and complete the survey</Card.Title>
-				<ReactPlayer url="https://www.youtube.com/embed/VpDtWEguoJ4" width="inherit"/>
-				<Button variant="primary" onClick={this.handleClick}>Video 1 Survey</Button>
-			  </Card.Body>
-			</Card>
-
-			<Card>
-			  <Card.Header><b>Example Play 2</b></Card.Header>
-			  <Card.Body>
-				<Card.Title>Watch video 2 for a Rush Hour game play and complete the survey</Card.Title>	
-				<ReactPlayer url="https://www.youtube.com/embed/VpDtWEguoJ4" width="inherit" />
-				<Button variant="primary" onClick={this.handleClick}>Video 2 Survey</Button>
-			  </Card.Body>
-			</Card>
-
-			<Card>
-			  <Card.Header><b>Example Play 3</b></Card.Header>
-			  <Card.Body>
-				<Card.Title>Watch video 3 for a Rush Hour game play and complete the survey</Card.Title>
-				<ReactPlayer url="https://www.youtube.com/embed/VpDtWEguoJ4" width="inherit" />
-				<Button variant="primary" onClick={this.handleClick}>Video 3 Survey</Button>
-			  </Card.Body>
-			</Card>
-		 </CardGroup>
-		 		 
+		  <Container>
+			{alert1}
+			{alert2}
+			{alert3}
+			<SurveyItem survey={1} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
+			<SurveyItem survey={2} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
+			<SurveyItem survey={3} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
+		 </Container>
 	  );
 	}
 }export default Survey;
