@@ -1,10 +1,11 @@
 import React from 'react'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Alert, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Howto from './Howto'
 import Survey from './Survey'
 import Consent from './Consent'
 import ConsentAgreed from './ConsentAgreed';
+import Demographics from './Demographics';
 
 class MainApp extends React.Component{
 	  constructor(props) {
@@ -14,9 +15,13 @@ class MainApp extends React.Component{
 		this.handleGiveConsent = this.handleGiveConsent.bind(this);
 		this.activateSession = this.activateSession.bind(this);
 		this.toggleContent = this.toggleContent.bind(this);
+		this.updateCompletedSurveys = this.updateCompletedSurveys.bind(this);
+		this.displayDemographicsSurvey = this.displayDemographicsSurvey.bind(this);
 		this.state = {
 		  activeTab: '1',
-		  active: false
+		  active: false,
+		  userid:0,
+		  completedSurveys:[]
 		};
 	  }
 
@@ -28,6 +33,23 @@ class MainApp extends React.Component{
 		}
 	  }
 	
+	updateCompletedSurveys(arg){
+		let s=this.state.completedSurveys;
+		s.push(arg)
+		this.setState({
+			completedSurveys: s
+		});
+	}
+	
+	displayDemographicsSurvey(){
+		let alert=null, demo=null
+		//if(this.completedSurveys.includes(1) && this.completedSurveys.includes(2) && this.completedSurveys.includes(3) ) {
+			alert = <Alert variant="info"> To wrap up, complete a short demographics survey</Alert>
+			demo = <Demographics uid={this.state.userid}/>
+		//}
+		return [alert,demo]
+	}
+	
 	handleGiveConsent(inputstr){
 		this.fetch(inputstr)
 	}
@@ -36,7 +58,8 @@ class MainApp extends React.Component{
 		console.log("activating session",uid)
 		localStorage.setItem('sessionid', uid);
 		 this.setState({
-			active: true
+			active: true,
+			userid:uid
 		  });
 	}
 	
@@ -96,6 +119,8 @@ class MainApp extends React.Component{
 	
 	render() {
 		let conditional = this.toggleContent();
+		let demo = this.displayDemographicsSurvey();
+		console.log(demo)
 		 return (
 			<div>
 				<div><h4>Explaining Intervention in Rush Hour</h4></div>
@@ -130,8 +155,14 @@ class MainApp extends React.Component{
 				  <TabPane tabId="3">
 					<Row>
 					  <Col sm="12">
-						<Survey uid={localStorage.getItem('sessionid')} />
+						<Survey uid={localStorage.getItem('sessionid')} completed={this.updateCompletedSurveys} />
 					  </Col>
+					</Row>
+					<Row>
+						<Col sm="12">
+						{demo[0]}
+						{demo[1]}
+						</Col> 
 					</Row>
 				  </TabPane>
 				</TabContent>

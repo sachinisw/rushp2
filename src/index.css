@@ -130,3 +130,11 @@ body {
 .card-img-top{
  width:50%;
 }
+
+.form-group {
+ margin-bottom: 0;
+}
+
+.form-label-error{
+  border-left: 6px solid #f50b0b;
+}

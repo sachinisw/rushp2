@@ -34,19 +34,21 @@ class Survey extends React.Component{
 			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 1 was succesfully submitted</Alert>
 		}
 		if(this.state.currentQuiz===2){
-			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 2 was succesfully submitted</Alert>
+			alert2 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 2 was succesfully submitted</Alert>
 		}
 		if(this.state.currentQuiz===3){
-			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 3 was succesfully submitted</Alert>
+			alert3 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 3 was succesfully submitted</Alert>
 		}
+		
 		 return (
 		  <Container>
+			<SurveyItem survey={1} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} 
+			showalert={this.displayAlert} completed={this.props.completed}/>
 			{alert1}
+			<SurveyItem survey={2} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert} completed={this.props.completed}/>
 			{alert2}
+			<SurveyItem survey={3} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert} completed={this.props.completed}/>
 			{alert3}
-			<SurveyItem survey={1} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
-			<SurveyItem survey={2} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
-			<SurveyItem survey={3} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert}/>
 		 </Container>
 	  );
 	}

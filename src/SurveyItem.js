@@ -35,7 +35,7 @@ class SurveyItem extends React.Component{
 				<Card.Title>Watch video {this.props.survey} for a Rush Hour game play and complete the survey</Card.Title>
 				<ReactPlayer url={this.props.url} width="inherit"/>
 				<br/>
-				<Evaluation quiz={this.props.survey} uid={this.props.uid} success={this.submitSuccess} showalert={this.props.showalert} />	
+				<Evaluation quiz={this.props.survey} uid={this.props.uid} success={this.submitSuccess} showalert={this.props.showalert} completed={this.props.completed}/>	
 			  </Card.Body>
 			</Card>
 			</Col>

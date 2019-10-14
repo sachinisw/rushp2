@@ -29,6 +29,7 @@ class Evaluation extends React.Component{
 			this.fetch("SATIS#"+JSON.stringify(obj))
 			this.props.success(false)
 			this.props.showalert(true,this.props.quiz)
+			this.props.completed(this.props.quiz)
 		}else{ //form has errors. can't submit
 			
 		}
