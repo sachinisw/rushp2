@@ -76,8 +76,10 @@ export function validText(values){ //only alphanumeric, whitespaces, commas are 
 }
 
 export function foundObjectInArray(arr, ob){
+	console.log(arr)
 	for(let i=0; i<arr.length; i++){
 		if(Object.keys(arr[i])[0]===Object.keys(ob)[0]){
+			console.log("found",ob)
 			return true
 		}
 	}

@@ -6,7 +6,7 @@
   "author": "Sachini Weerawardhana",
   "license": "MIT",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "node ./app.js",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js --progress --colors",
     "dev": "webpack-dev-server --hot --history-api-fallback --open"
   },

@@ -25,13 +25,12 @@ class Evaluation extends React.Component{
 		let haserror = hasError(errors) //false means no error
 		if(!haserror){//if no error send type.uid,data to server and hide form.
 			let obj = { uid:this.props.uid, quizid: this.props.quiz, answers: this.state.values };
-			console.log(JSON.stringify(obj))
-			this.fetch("SATIS#"+JSON.stringify(obj))
-			this.props.success(false)
-			this.props.showalert(true,this.props.quiz)
-			this.props.completed(this.props.quiz)
-		}else{ //form has errors. can't submit
-			
+			let status = this.fetch("SATIS#"+JSON.stringify(obj))
+			if(status){
+				this.props.success(false)
+				this.props.showalert(true,this.props.quiz)
+				this.props.completed(this.props.quiz)
+			}
 		}
 	  }
 	  
@@ -61,12 +60,13 @@ class Evaluation extends React.Component{
                 });
             let ret = await jsonReturned.json();// Wait for server to return and convert it to json.
             let retJSON = JSON.parse(ret); //parse ret to JSON object. check retJSON.type and apply correct behavior 
-            if(retJSON.type==="SATIS"){
-				//this.activateSession(retJSON.uuid)
+            if(retJSON.type==="SATIS" && retJSON.message==="SUCCESS"){
+				return true
 			}
          } catch (e) {
             console.error(e);
         }
+        return false
     }
     
 	render() {

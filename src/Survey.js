@@ -12,7 +12,6 @@ class Survey extends React.Component{
 			currentQuiz:0
 		};
 		this.displayAlert = this.displayAlert.bind(this);
-		this.alertOnClose = this.alertOnClose.bind(this);
 	}
 	
 	displayAlert(status,quiz){
@@ -22,22 +21,16 @@ class Survey extends React.Component{
 		});
 	}
 	
-	alertOnClose(){
-		this.setState({
-			 show:false
-		});
-	}
-	
 	render() {
 		let alert1=null, alert2=null, alert3=null
 		if(this.state.currentQuiz===1){
-			alert1 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 1 was succesfully submitted</Alert>
+			alert1 = <Alert variant="success" > Survey 1 was succesfully submitted</Alert>
 		}
 		if(this.state.currentQuiz===2){
-			alert2 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 2 was succesfully submitted</Alert>
+			alert2 = <Alert variant="success" > Survey 2 was succesfully submitted</Alert>
 		}
 		if(this.state.currentQuiz===3){
-			alert3 = <Alert variant="success" dismissible onClose={this.alertOnClose}> Survey 3 was succesfully submitted</Alert>
+			alert3 = <Alert variant="success" > Survey 3 was succesfully submitted</Alert>
 		}
 		
 		 return (

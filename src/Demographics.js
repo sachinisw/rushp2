@@ -57,7 +57,7 @@ class Demographics extends React.Component{
 			alertmsg2:"",
 			alertmsg3:"",
 			displayAlert:null,
-			validated:false
+			validated:false,
 		};
 	  }
 	  
@@ -69,7 +69,8 @@ class Demographics extends React.Component{
 						{q7:this.state.q7,q7o:this.state.q7o},{q8:this.state.q8,q8o:this.state.q8o},
 						{q9:this.state.q9,q9o:this.state.q9o}]
 		let errComplete = demoFormComplete(valuearr)
-		this.setErrorValues(errComplete[0], errComplete[1], errComplete[1])
+		let txtInput = validText(valuearr)
+		this.setErrorValues(errComplete[0], errComplete[1], txtInput)
 	  }
 	
 	validateandSubmit(){
@@ -78,17 +79,19 @@ class Demographics extends React.Component{
 		|| this.state.eq6 || this.state.eq7 || this.state.eq8 || this.state.eq9 || this.state.fq5o || this.state.fq6o
 		|| this.state.fq7o || this.state.fq8o || this.state.fq9o || this.state.iq5 || this.state.iq6 || this.state.iq7
 		|| this.state.iq8 || this.state.iq9){
-			console.log("not validated")
 			al = <Alert variant="danger"> <Alert.Heading> Errors in Survey! </Alert.Heading> <hr />
 				<div className="mb-0">{this.state.alertmsg1}</div>
 				<div className="mb-0">{this.state.alertmsg2}</div>
 				<div className="mb-0">{this.state.alertmsg3}</div>
 			</Alert>
 		}else{
-			console.log("all good")
-			//let obj = { uid:this.props.uid, quizid: this.props.quiz, answers: valuearr};
-			//console.log(JSON.stringify(obj))
-			//this.fetch("DEMO2#"+JSON.stringify(obj))
+			let valuearr = [{q1:this.state.q1},{q2:this.state.q2},{q3:this.state.q3},{q4:this.state.q4},
+						{q5:this.state.q5,q5o:this.state.q5o},{q6:this.state.q6,q6o:this.state.q6o},
+						{q7:this.state.q7,q7o:this.state.q7o},{q8:this.state.q8,q8o:this.state.q8o},
+						{q9:this.state.q9,q9o:this.state.q9o}]
+			let obj = { uid:this.props.uid, answers: valuearr};
+			console.log(JSON.stringify(obj))
+			this.fetch("DEMO2#"+JSON.stringify(obj))
 		}
 		this.setState({
 			displayAlert:al
@@ -179,7 +182,7 @@ class Demographics extends React.Component{
 			msg2=""
 		}
 		//set text format error
-		console.log("error text format set to")
+		console.log("error text format set to", errText)
 		for(let i=0; i<errText.length; i++){
 			let ob=errText[i]
 			if(Object.keys(ob)[0]==="q5" && !foundObjectInArray(errEmpty,Object.keys(ob))
@@ -338,8 +341,7 @@ class Demographics extends React.Component{
 			 q5:q5temp,
 			 q9:q9temp
 		 });
-	  }      
-	  
+	  }      	  
 	
 	async fetch(input) {
 		console.log(input)
@@ -358,9 +360,9 @@ class Demographics extends React.Component{
                     body: JSON.stringify(clientRequest)
                 });
             let ret = await jsonReturned.json();// Wait for server to return and convert it to json.
-            let retJSON = JSON.parse(ret); //parse ret to JSON object. check retJSON.type and apply correct behavior 
-            if(retJSON.type==="DEMO2"){
-				//this.activateSession(retJSON.uuid)
+            let retJSON = JSON.parse(ret); //parse ret to JSON object. check retJSON.type and apply correct behavior
+            if(retJSON.type==="DEMO2" && retJSON.message==="SUCCESS"){
+				this.props.unmount(true)
 			}
          } catch (e) {
             console.error(e);
@@ -605,7 +607,7 @@ class Demographics extends React.Component{
 						<Form.Group>
 						<Form.Group as={Col}>
 							<Form.Check inline
-							  type="checkbox" label="Others (specify)" name="q9" value="q9other" onChange={this.collectData}  />
+							  type="checkbox" label="Others (specify)" name="q9" value="q9other" onChange={this.collectData} />
 							<Form.Control
 								type="text"	name="q9o" value={this.state.q9o} onChange={this.collectData} />
 						</Form.Group>

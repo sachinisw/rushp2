@@ -6,6 +6,7 @@ import Survey from './Survey'
 import Consent from './Consent'
 import ConsentAgreed from './ConsentAgreed';
 import Demographics from './Demographics';
+import Debrief from './Debrief'
 
 class MainApp extends React.Component{
 	  constructor(props) {
@@ -17,11 +18,13 @@ class MainApp extends React.Component{
 		this.toggleContent = this.toggleContent.bind(this);
 		this.updateCompletedSurveys = this.updateCompletedSurveys.bind(this);
 		this.displayDemographicsSurvey = this.displayDemographicsSurvey.bind(this);
+		this.closing = this.closing.bind(this);
 		this.state = {
 		  activeTab: '1',
 		  active: false,
 		  userid:0,
-		  completedSurveys:[]
+		  completedSurveys:[],
+		  close:false
 		};
 	  }
 
@@ -41,15 +44,21 @@ class MainApp extends React.Component{
 		});
 	}
 	
-	displayDemographicsSurvey(){
-		let alert=null, demo=null
-		//if(this.completedSurveys.includes(1) && this.completedSurveys.includes(2) && this.completedSurveys.includes(3) ) {
-			alert = <Alert variant="info"> To wrap up, complete a short demographics survey</Alert>
-			demo = <Demographics uid={this.state.userid}/>
-		//}
-		return [alert,demo]
+	closing(canClose){
+		this.setState({
+			close: canClose,
+		});
 	}
 	
+	displayDemographicsSurvey(){
+		let alert=null, demo=null
+		if(this.state.completedSurveys.includes(1) && this.state.completedSurveys.includes(2) && this.state.completedSurveys.includes(3) ) {
+			alert = <Alert variant="info"> To wrap up, complete a short demographics survey</Alert>
+			demo = <Demographics uid={this.state.userid} unmount={this.closing}/>
+		}
+		return [alert,demo]
+	}
+
 	handleGiveConsent(inputstr){
 		this.fetch(inputstr)
 	}
@@ -119,21 +128,21 @@ class MainApp extends React.Component{
 	
 	render() {
 		let conditional = this.toggleContent();
-		let demo = this.displayDemographicsSurvey();
-		console.log(demo)
+		let demo = null, debrief=null
+		demo = this.displayDemographicsSurvey();
 		 return (
 			<div>
 				<div><h4>Explaining Intervention in Rush Hour</h4></div>
 		         <Nav tabs>
-		         <NavItem>
+		         <NavItem as="li">
 					<NavLink className={classnames({ active: this.state.activeTab === '1'})} onClick={() => { this.toggle('1');}}  >
 					  Agree to Participate
 					</NavLink>
 				  </NavItem>
-		          <NavItem>
+		          <NavItem as="li">
 					{conditional[1]}
 				  </NavItem>
-				  <NavItem>
+				  <NavItem as="li">
 					{conditional[2]}
 				  </NavItem>
 				</Nav>
@@ -160,8 +169,9 @@ class MainApp extends React.Component{
 					</Row>
 					<Row>
 						<Col sm="12">
-						{demo[0]}
-						{demo[1]}
+						{!this.state.close ? demo[0] :null}
+						{!this.state.close ? demo[1] :null}
+						{this.state.close ? <Debrief /> :null}
 						</Col> 
 					</Row>
 				  </TabPane>
