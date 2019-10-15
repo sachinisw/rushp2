@@ -164,7 +164,7 @@ class MainApp extends React.Component{
 				  <TabPane tabId="3">
 					<Row>
 					  <Col sm="12">
-						<Survey uid={localStorage.getItem('sessionid')} completed={this.updateCompletedSurveys} />
+						{!this.state.close ? <Survey uid={localStorage.getItem('sessionid')} completed={this.updateCompletedSurveys} /> :null}
 					  </Col>
 					</Row>
 					<Row>

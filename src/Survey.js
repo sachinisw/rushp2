@@ -35,8 +35,7 @@ class Survey extends React.Component{
 		
 		 return (
 		  <Container>
-			<SurveyItem survey={1} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} 
-			showalert={this.displayAlert} completed={this.props.completed}/>
+			<SurveyItem survey={1} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert} completed={this.props.completed}/>
 			{alert1}
 			<SurveyItem survey={2} url="https://www.youtube.com/embed/VpDtWEguoJ4" uid={this.props.uid} showalert={this.displayAlert} completed={this.props.completed}/>
 			{alert2}

@@ -90,7 +90,6 @@ class Demographics extends React.Component{
 						{q7:this.state.q7,q7o:this.state.q7o},{q8:this.state.q8,q8o:this.state.q8o},
 						{q9:this.state.q9,q9o:this.state.q9o}]
 			let obj = { uid:this.props.uid, answers: valuearr};
-			console.log(JSON.stringify(obj))
 			this.fetch("DEMO2#"+JSON.stringify(obj))
 		}
 		this.setState({
