@@ -23,7 +23,7 @@
   "dependencies": {
     "express": "^4.15.2",
     "popper.js": "^1.15.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
